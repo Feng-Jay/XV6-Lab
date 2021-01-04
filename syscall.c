@@ -7,7 +7,7 @@
 #include "x86.h"
 #include "syscall.h"
 
-static char syscall_name[][15]={
+/*static char syscall_name[][15]={
 [SYS_fork]    "fork",
 [SYS_exit]    "exit",
 [SYS_wait]    "wait",
@@ -30,7 +30,7 @@ static char syscall_name[][15]={
 [SYS_mkdir]   "mkdir",
 [SYS_close]   "close",
 [SYS_date]    "date",
-};
+};*/
 
 
 // User code makes a system call with INT T_SYSCALL.
@@ -165,7 +165,7 @@ syscall(void)
   num = curproc->tf->eax;
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     curproc->tf->eax = syscalls[num]();
-    cprintf("Syscall: %s -> %d\n",syscall_name[num],num);
+    //cprintf("Syscall: %s -> %d\n",syscall_name[num],num);
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             curproc->pid, curproc->name, num);
